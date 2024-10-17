@@ -118,8 +118,13 @@ class WrfoutVerticalPlot:
             ]
             rotation = 0
         else:
-            label = [pair.latlon_str() for pair in to_np(label_bases)]
-            rotation = 45
+            label = [
+                str(round(pair.lat, DECIMAL_PLACES))
+                + ", "
+                + str(round(pair.lon, DECIMAL_PLACES))
+                for pair in to_np(label_bases)
+            ]
+            rotation = 15
         ax.set_x_ticks_label(label, rotation)
 
     def fill_terrain_space(self, ax: AxesMethod) -> None:

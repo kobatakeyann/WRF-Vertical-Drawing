@@ -25,6 +25,7 @@ from constant import (
     SHADE_MAX,
     SHADE_MIN,
     TERRAIN_COLOR,
+    TICKS_FONTSIZE,
     TITLE_SIZE,
     VECTOR_COLOR,
     VECTOR_HEADAXIS_LENGTH,
@@ -80,7 +81,11 @@ class AxesMethod:
     def set_x_ticks_label(self, x_label: list, rotation: int) -> None:
         loc = np.arange(0, len(x_label), 1)[::X_TICKS_INTERVAL]
         self.ax.set_xticks(loc)
-        self.ax.set_xticklabels(x_label[::X_TICKS_INTERVAL], rotation=rotation)
+        self.ax.set_xticklabels(
+            x_label[::X_TICKS_INTERVAL],
+            rotation=rotation,
+            fontsize=TICKS_FONTSIZE,
+        )
 
     def set_x_label(self, x_label: str) -> None:
         self.ax.set_xlabel(x_label, fontsize=LABEL_FONTSIZE)

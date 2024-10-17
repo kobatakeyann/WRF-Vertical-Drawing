@@ -4,38 +4,39 @@ WRFOUT_PATH = "/data/wrfout/netcdf/wrfout_nestingtest_d02_2023-08-21_00:00:00"
 WRFOUT_INTERVAL = 10
 
 # start and end points of vertical cross section
-LAT_START = 33
-LAT_END = 34
-LON_START = 130.5
-LON_END = 130.5
+LAT_START = 32.75
+LAT_END = 33.5
+LON_START = 130
+LON_END = 130.75
 
 # y-axis
-is_p_coord = False  # pressure or height coordinate
+is_p_coord = True  # pressure or height coordinate
 # range: [hpa] for pressure coordinate, [m] for height coordinate
-Y_MAX = 2000
-Y_MIN = 0
+Y_MAX = 1000
+Y_MIN = 700
 
 # title
 TITLE = "vertical cross section"
 TITLE_SIZE = 10
 
 # ticks and labels
-DECIMAL_PLACES = 3
+DECIMAL_PLACES = 2
 X_TICKS_INTERVAL = 10
 LABEL_FONTSIZE = 12
+TICKS_FONTSIZE = 7
 
 # for shade
 shade_plot = True
 SHADE_VARNAME = "QVAPOR"
-SHADE_MIN = 0
+SHADE_MIN = 10
 SHADE_MAX = 20
-SHADE_INTERVAL = 1
+SHADE_INTERVAL = 0.5
 SHADE_MULTIPLIER = 1000
 SHADE_ADDITION = 0
 TERRAIN_COLOR = "sienna"
 # color bar
 COLOR_MAP_NAME = "Blues"
-CBAR_EXTENTION = "max"
+CBAR_EXTENTION = "both"
 paint_all = True
 WHITE_PART_NUM_FROM_MIDDLE = 2
 CBAR_TICKS_INTERVAL = 20
@@ -67,19 +68,19 @@ U_VEXTOR_VARNAME = "uvmet"
 V_VEXTOR_VARNAME = "wa"
 VECTOR_X_SPARSITY = 5
 VECTOR_Y_SPARSITY = 2
-VECTOR_REDUCTION_SCALE = 70
+VECTOR_REDUCTION_SCALE = 50
 VECTOR_COLOR = "lightslategray"  # "lightslategray"
 VECTOR_X_MULTIPLIER = 1
 VECTOR_Y_MULTIPLIER = 10
 # vector arrow shape
-VECTOR_WIDTH = 0.007
+VECTOR_WIDTH = 0.004
 VECTOR_LINEWIDTH = 1.5
 VECTOR_HEADWIDTH = 4.0
 VECTOR_HEADLENGTH = 5
 VECTOR_HEADAXIS_LENGTH = 4
 # vector legend
 vector_legend_plot = True
-VECTOR_LEDEND_VALUE = 10
+VECTOR_LEDEND_VALUE = 5
 VECTOR_LEDEND_SIZE = 8
 VECTOR_LEGEND_NAME = f"{VECTOR_LEDEND_VALUE} " + r"[$\mathrm{m\,s^{-1}}$]"
 

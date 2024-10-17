@@ -1,4 +1,5 @@
 from datetime import datetime
+from math import cos, sin
 
 import netCDF4 as nc
 import numpy as np
@@ -44,7 +45,7 @@ class ArrayExtraction(WrfoutController):
     def get_array_for_shade(
         self, shade_varname: str, datetime: datetime, is_p_coord: bool
     ) -> ndarray:
-        if "water_vapor_flux" in shade_varname:
+        if "wv_flux" in shade_varname:
             self.get_moisture_flux(datetime)
             u_data = self.moisture_flux_u
             v_data = self.moisture_flux_v
@@ -66,17 +67,29 @@ class ArrayExtraction(WrfoutController):
         datetime: datetime,
         is_p_coord: bool,
     ) -> tuple[ndarray, ndarray]:
-        u_array = self.get_var_dataset(u_varname, datetime)
-        v_array = self.get_var_dataset(v_varname, datetime)
-        if "u_v" in u_array.dims:
-            if LAT_START == LAT_END:
-                u_array = u_array[0, :, :]
-            elif LON_START == LON_END:
-                u_array = u_array[1, :, :]
-            else:
-                raise Exception(
-                    "Cannot plot vector on vertical cross section when the cross section is neither along the latitude line nor the longitude line."
-                )
+        if "wv_flux" in u_varname:
+            self.get_moisture_flux(datetime)
+            u_component = self.moisture_flux_u
+            v_component = self.moisture_flux_v
+        else:
+            u_array = self.get_var_dataset(u_varname, datetime)
+            v_array = self.get_var_dataset(v_varname, datetime)
+            if "u_v" in u_array.dims:
+                u_component = u_array[0, :, :]
+                v_component = u_array[1, :, :]
+        delta_lon = LON_END - LAT_START
+        delta_lat = LAT_END - LAT_START
+        if delta_lat == 0:
+            u_array = u_component
+        elif delta_lon == 0:
+            u_array = v_component
+        elif delta_lon < 0:
+            raise Exception(
+                "Cannot plot vector on vertical cross section. Set start point at left and end point at right."
+            )
+        else:
+            azimuth = np.arctan2(delta_lon, delta_lat)
+            u_array = u_component * sin(azimuth) + v_component * cos(azimuth)
         u_vert_array = self.get_vertcross_array(u_array, is_p_coord)
         v_vert_array = self.get_vertcross_array(v_array, is_p_coord)
         return u_vert_array, v_vert_array
