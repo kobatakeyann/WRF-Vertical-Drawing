@@ -115,12 +115,16 @@ class AxesMethod:
         return customized_cool
 
     def plot_shading(
-        self, x_coord: ndarray, y_coord: ndarray, array: ndarray
+        self,
+        x_coord: ndarray,
+        y_coord: ndarray,
+        array: ndarray,
+        is_p_coord: bool,
     ) -> None:
-        # for terrain plot
-        self.ax.fill_between(
-            x_coord, y_coord.min(), y_coord.max(), color=TERRAIN_COLOR
-        )
+        if is_p_coord:
+            self.ax.fill_between(
+                x_coord, y_coord.min(), y_coord.max(), color=TERRAIN_COLOR
+            )
         self.shade = self.ax.contourf(
             x_coord,
             y_coord,

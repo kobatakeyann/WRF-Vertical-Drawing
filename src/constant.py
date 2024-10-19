@@ -10,10 +10,11 @@ LON_START = 130
 LON_END = 130.75
 
 # y-axis
-is_p_coord = True  # pressure or height coordinate
+is_p_coord = False  # pressure or height coordinate
 # range: [hpa] for pressure coordinate, [m] for height coordinate
-Y_MAX = 1000
-Y_MIN = 700
+Y_MAX = 3000
+Y_MIN = 0
+INTERPOLATION_INTERVAL = 50
 
 # title
 TITLE = "vertical cross section"
@@ -67,7 +68,7 @@ vector_plot = True
 U_VEXTOR_VARNAME = "uvmet"
 V_VEXTOR_VARNAME = "wa"
 VECTOR_X_SPARSITY = 5
-VECTOR_Y_SPARSITY = 2
+VECTOR_Y_SPARSITY = 100
 VECTOR_REDUCTION_SCALE = 50
 VECTOR_COLOR = "lightslategray"  # "lightslategray"
 VECTOR_X_MULTIPLIER = 1

@@ -7,7 +7,15 @@ from numpy import ndarray
 from wrf import ALL_TIMES, CoordPair, getvar, interpline, to_np, vertcross
 from xarray import DataArray
 
-from constant import LAT_END, LAT_START, LON_END, LON_START
+from constant import (
+    INTERPOLATION_INTERVAL,
+    LAT_END,
+    LAT_START,
+    LON_END,
+    LON_START,
+    Y_MAX,
+    Y_MIN,
+)
 from time_relation.conversion import get_formatted_times
 
 
@@ -99,8 +107,11 @@ class ArrayExtraction(WrfoutController):
     ) -> ndarray:
         if is_p_coord:
             z = getvar(self.nc_ds, "p") * 0.01
+            levels = np.arange(Y_MAX, Y_MIN - 0.001, -INTERPOLATION_INTERVAL)
+            print(levels)
         else:
             z = getvar(self.nc_ds, "z")
+            levels = np.arange(Y_MIN, Y_MAX, 1)
         start_point = CoordPair(lat=LAT_START, lon=LON_START)
         end_point = CoordPair(lat=LAT_END, lon=LON_END)
         vertcross_array = vertcross(
@@ -109,6 +120,7 @@ class ArrayExtraction(WrfoutController):
             wrfin=self.nc_ds,
             start_point=start_point,
             end_point=end_point,
+            levels=levels,
             latlon=True,
             meta=True,
         )
