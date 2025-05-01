@@ -25,6 +25,7 @@ from constant import (
     SHADE_MAX,
     SHADE_MIN,
     TERRAIN_COLOR,
+    TICKS_FONTSIZE,
     TITLE_SIZE,
     VECTOR_COLOR,
     VECTOR_HEADAXIS_LENGTH,
@@ -80,7 +81,11 @@ class AxesMethod:
     def set_x_ticks_label(self, x_label: list, rotation: int) -> None:
         loc = np.arange(0, len(x_label), 1)[::X_TICKS_INTERVAL]
         self.ax.set_xticks(loc)
-        self.ax.set_xticklabels(x_label[::X_TICKS_INTERVAL], rotation=rotation)
+        self.ax.set_xticklabels(
+            x_label[::X_TICKS_INTERVAL],
+            rotation=rotation,
+            fontsize=TICKS_FONTSIZE,
+        )
 
     def set_x_label(self, x_label: str) -> None:
         self.ax.set_xlabel(x_label, fontsize=LABEL_FONTSIZE)
@@ -110,12 +115,16 @@ class AxesMethod:
         return customized_cool
 
     def plot_shading(
-        self, x_coord: ndarray, y_coord: ndarray, array: ndarray
+        self,
+        x_coord: ndarray,
+        y_coord: ndarray,
+        array: ndarray,
+        is_p_coord: bool,
     ) -> None:
-        # for terrain plot
-        self.ax.fill_between(
-            x_coord, y_coord.min(), y_coord.max(), color=TERRAIN_COLOR
-        )
+        if is_p_coord:
+            self.ax.fill_between(
+                x_coord, y_coord.min(), y_coord.max(), color=TERRAIN_COLOR
+            )
         self.shade = self.ax.contourf(
             x_coord,
             y_coord,

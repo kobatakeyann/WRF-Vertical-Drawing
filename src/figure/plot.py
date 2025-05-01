@@ -2,7 +2,6 @@ from datetime import datetime
 from pathlib import Path
 
 import matplotlib.pyplot as plt
-import numpy as np
 from wrf import to_np
 
 from arangement.dataset import ArrayExtraction
@@ -51,11 +50,15 @@ class WrfoutVerticalPlot:
         shade_array = self.wrfout.get_array_for_shade(
             SHADE_VARNAME, datetime, is_p_coord
         )
-        shade_array = np.ma.filled(shade_array, np.nan)
+        # for terrain plot
+        if not is_p_coord:
+            terrain_array = self.wrfout.get_terrain_array()
+            ax.fill_designated_area(self.wrfout.x_coord, terrain_array)
         ax.plot_shading(
             self.wrfout.x_coord,
             self.wrfout.y_coord,
             shade_array * SHADE_MULTIPLIER + SHADE_ADDITION,
+            is_p_coord,
         )
         ax.plot_colorbar(is_auto_ticks=cbar_auto_ticks)
         ax.set_cbar_label()
@@ -118,8 +121,13 @@ class WrfoutVerticalPlot:
             ]
             rotation = 0
         else:
-            label = [pair.latlon_str() for pair in to_np(label_bases)]
-            rotation = 45
+            label = [
+                str(round(pair.lat, DECIMAL_PLACES))
+                + ", "
+                + str(round(pair.lon, DECIMAL_PLACES))
+                for pair in to_np(label_bases)
+            ]
+            rotation = 15
         ax.set_x_ticks_label(label, rotation)
 
     def fill_terrain_space(self, ax: AxesMethod) -> None:
