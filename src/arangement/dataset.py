@@ -108,12 +108,12 @@ class ArrayExtraction(WrfoutController):
         if is_p_coord:
             z = getvar(self.nc_ds, "p") * 0.01
             levels = np.arange(Y_MAX, Y_MIN - 0.001, -INTERPOLATION_INTERVAL)
-            print(levels)
         else:
             z = getvar(self.nc_ds, "z")
-            levels = np.arange(Y_MIN, Y_MAX, 1)
+            levels = np.arange(Y_MIN, Y_MAX, INTERPOLATION_INTERVAL)
         start_point = CoordPair(lat=LAT_START, lon=LON_START)
         end_point = CoordPair(lat=LAT_END, lon=LON_END)
+        print(var_array.var)
         vertcross_array = vertcross(
             var_array,
             z,

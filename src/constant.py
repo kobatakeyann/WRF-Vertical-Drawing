@@ -1,20 +1,20 @@
 # wrfout file path
-WRFOUT_PATH = "/data/wrfout/netcdf/wrfout_nestingtest_d02_2023-08-21_00:00:00"
+WRFOUT_PATH = "/data/wrfout/netcdf/wrfout_d02_2013-02-07_00:00:00"
 # time step
-WRFOUT_INTERVAL = 10
+WRFOUT_INTERVAL = 30
 
 # start and end points of vertical cross section
-LAT_START = 32.75
-LAT_END = 33.5
-LON_START = 130
-LON_END = 130.75
+LAT_START = 45
+LAT_END = 45
+LON_START = 140
+LON_END = 150
 
 # y-axis
 is_p_coord = False  # pressure or height coordinate
 # range: [hpa] for pressure coordinate, [m] for height coordinate
-Y_MAX = 3000
+Y_MAX = 6000
 Y_MIN = 0
-INTERPOLATION_INTERVAL = 50
+INTERPOLATION_INTERVAL = 10
 
 # title
 TITLE = "vertical cross section"
@@ -29,9 +29,9 @@ TICKS_FONTSIZE = 7
 # for shade
 shade_plot = True
 SHADE_VARNAME = "QVAPOR"
-SHADE_MIN = 10
-SHADE_MAX = 20
-SHADE_INTERVAL = 0.5
+SHADE_MIN = 0
+SHADE_MAX = 2
+SHADE_INTERVAL = 0.1
 SHADE_MULTIPLIER = 1000
 SHADE_ADDITION = 0
 TERRAIN_COLOR = "sienna"
@@ -49,22 +49,22 @@ cbar_auto_ticks = True
 
 
 # for contour
-contour_plot = False
+contour_plot = True
 CONTOUR_VARNAME = "wa"
-CONTOUR_MIN = 1
-CONTOUR_MAX = 5
+CONTOUR_MIN = 5
+CONTOUR_MAX = 100
 CONTOUR_INTERVAL = 1
-CONTOUR_MULTIPLIER = 1
+CONTOUR_MULTIPLIER = 100
 CONTOUR_ADDITION = 0
 CONTOUR_WIDTH = 0.5
 CONTOUR_COLOR = "red"
 CONTOUR_LABEL_SIZE = 5
-plot_contour_label = False
-CONTOUR_LABEL_INTERVAL = 1
+plot_contour_label = True
+CONTOUR_LABEL_INTERVAL = 5
 
 
 # for vector
-vector_plot = True
+vector_plot = False
 U_VEXTOR_VARNAME = "uvmet"
 V_VEXTOR_VARNAME = "wa"
 VECTOR_X_SPARSITY = 5
