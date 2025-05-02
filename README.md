@@ -1,29 +1,40 @@
-# WRF vertical drawing 
-領域気象モデルWRFのシミュレーション結果の鉛直断面図を描画します。
+# WRF Vertical Drawing
 
-![](sample.jpg)
+領域気象モデルWRFのシミュレーション結果を描画します。
 
+!["sample1.jpg"](sample_qv.jpg)
+!["sample2.jpg"](sample_radar_refrectivity.jpg)
+!["sample3.gif"](sample_potential_temperature.gif)
 
-# 仮想環境の作成とactivate
-```
+## 仮想環境
+
+```bash
 # via anaconda
 conda env create -f requirements.yml
 conda activate wrf
 ```
 
-# Usage
-`data/wrfout/netcdf`下にシミュレーション結果のnetcdfファイルを配置、<br>
-`src/constant.py`で描画範囲等を設定します。
-```
-python src/main.py
-```
-を実行して、画像やGifを作成します。<br>
-作成された画像は `img`下に出力されます。
- 
-# Note
-- ### 変数名
-   描画する変数名は、<br>
-   `data/wrfout/information`下に出力されるテキストファイル及び
-   [公式ドキュメント](https://wrf-python.readthedocs.io/en/latest/user_api/generated/wrf.getvar.html#wrf.getvar)を参照してください。
+## Usage
 
- 
+1. `data/wrfout`下にシミュレーション結果のnetcdfファイルを配置
+
+   ```bash
+   cd path/to/this/root_dir
+   mkdir -p data/wrfout
+   cp /path/to/your_wrfout_file.nc data/wrfout
+   ```
+
+2. `src/constants/configuration.py`で描画範囲等を設定
+
+3. `src/main.py`を実行して、画像やGifを作成
+
+   ```bash
+   python src/main.py
+   ```
+
+作成された画像は `img`下に出力されます。
+
+## Note
+
+   描画変数名は、`data/information`下に出力されるテキストファイル及び
+   [公式ドキュメント](https://wrf-python.readthedocs.io/en/latest/user_api/generated/wrf.getvar.html#wrf.getvar)を参照してください。
