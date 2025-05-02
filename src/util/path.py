@@ -1,13 +1,15 @@
 from pathlib import Path
 
+PROJECT_ROOT_DEPTH = 2
+
 
 def generate_path(path: str) -> str:
-    """絶対パスを生成
+    """generate the absolute path
 
-    Arg:
-      path (str): rootからの相対パス
+    Args:
+        path (str): Relative path from root directory.
 
-    Return:
-      str: 引数pathへの絶対パス
+    Returns:
+        str: Absolute path
     """
-    return str(Path(__file__).parents[2]) + path
+    return str(Path(__file__).parents[PROJECT_ROOT_DEPTH]) + path
