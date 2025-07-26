@@ -241,4 +241,3 @@ dependencies:
   - zipp=3.17.0=py311h06a4308_0
   - zlib=1.2.13=h4ab18f5_6
   - zstd=1.5.5=hc292b87_2
-prefix: /work1/kobatake_yusuke/miniconda3/envs/wrf
